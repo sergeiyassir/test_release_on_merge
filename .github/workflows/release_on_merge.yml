@@ -8,8 +8,23 @@ jobs:
   simple:
     runs-on: ubuntu-latest
     if: startsWith(github.event.head_commit.message, 'Setup the release ')
+    permissions:
+      contents: write
     steps:
-      - name: step1
-        run: |
-          VERSION=$(echo ${{github.event.head_commit.message}} | awk '{print $NF}')
-          echo $VERSION
+      - uses: actions/checkout@v2
+      - name: Set env // from https://stackoverflow.com/a/57969570
+        run: echo "VERSION=$(echo ${{github.event.head_commit.message}} | awk '{print $NF}')" >> $GITHUB_ENV
+      - name: Print version
+        run: echo "Version is $VERSION"
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+
+        with:
+          tag_name: v$VERSION
+          release_name: $VERSION
+          body_path: RELEASE.md
+          draft: false
+          prerelease: false
