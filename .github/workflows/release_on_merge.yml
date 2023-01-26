@@ -2,12 +2,12 @@ name: create a release and a tag if
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
-  job1:
+  simple:
     runs-on: ubuntu-latest
-    if: !startsWith(github.event.head_commit.message, 'Setup the release ')
+    if: startsWith(github.event.head_commit.message, 'Setup the release ')
     steps:
       - name: step1
         run: |
