@@ -2,8 +2,7 @@ name: create a release and a tag if
 on:
   push:
     branches:
-#      - master
-      - test-more-4
+      - master
 
 jobs:
   simple:
@@ -14,8 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set env // from https://stackoverflow.com/a/57969570
-#        run: echo "VERSION=$(echo ${{github.event.head_commit.message}} | awk '{print $NF}')" >> $GITHUB_ENV
-        run: echo "VERSION=$(awk -F'=' '/LIBRARY_VERSION/ {printf "%s", $NF; exit}' gradle.properties)" >> $GITHUB_ENV
+        run: echo "VERSION=$(awk -F'=' '/LIBRARY_VERSION/ {printf "%s", $NF; exit}' gradle.properties)" >> $GITHUB_STATE
       - name: Print version
         run: echo "Version is $VERSION"
       - name: Create Release
