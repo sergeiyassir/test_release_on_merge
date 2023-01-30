@@ -7,7 +7,7 @@ on:
 jobs:
   simple:
     runs-on: ubuntu-latest
-    if: startsWith(github.event.head_commit.message, 'Setup the release ')
+    if: startsWith(github.event.head_commit.message, 'Setup the release')
     permissions:
       contents: write
     steps:
