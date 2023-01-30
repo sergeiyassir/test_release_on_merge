@@ -1,4 +1,4 @@
-name: create a release and a tag if
+name: create a release and a tag it
 on:
   push:
     branches:
