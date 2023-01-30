@@ -13,7 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set env // from https://stackoverflow.com/a/57969570
-        run: echo "VERSION=$(echo ${{github.event.head_commit.message}} | awk '{print $NF}')" >> $GITHUB_ENV
+#        run: echo "VERSION=$(echo ${{github.event.head_commit.message}} | awk '{print $NF}')" >> $GITHUB_ENV
+        run: awk -F'=' '/LIBRARY_VERSION/ {print $NF}' gradle.properties >> $GITHUB_ENV
       - name: Print version
         run: echo "Version is $VERSION"
       - name: Create Release

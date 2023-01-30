@@ -1,0 +1,21 @@
+# This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java#publishing-using-gradle
+
+name: Gradle Package
+
+on:
+  workflow_dispatch: # This allow the workflow to be launched manually if needed
+  release:
+    types: [created]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Publish to GitHub Packages
+      run:
+        echo "running ./gradlew publish"
