@@ -1,5 +1,17 @@
 # YassirVTC Changelog
 
+### 0.10.3
+
+## Refactoring: Stage II
+- # 44444 : [Layering] Refactor classes packages
+
+### 0.10.2
+
+## Refactoring: Stage I
+- # 444 : [Layering] Refactor classes packages
+- # 448 : [CMB-3186] Fix cancel trip endpoints
+- # 445 : [CMB-2968] Use usecases instead of AccountDataHandler references
+
 ### 0.10.1
 
 ## Refactoring: Stage I

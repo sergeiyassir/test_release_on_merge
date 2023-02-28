@@ -15,7 +15,10 @@ jobs:
       - name: Set env // from https://stackoverflow.com/a/57969570
         run: |
           echo "VERSION=$(awk -F'=' '/LIBRARY_VERSION/ {printf "%s", $NF; exit}' gradle.properties)" >> $GITHUB_ENV
-          echo "CHANGES=$(awk 'BEGIN {a = 0} /###/ { if (a == 0) { a = 1 } else { exit 0 } }a' CHANGELOG.md)" >> $GITHUB_ENV
+          CHANGES=$(awk 'BEGIN {a = 0} /###/ { if (a == 0) { a = 1 } else { exit 0 } }a' CHANGELOG.md)
+          echo "CHANGES<<EOF" >> $GITHUB_ENV
+          echo "$CHANGES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
       - name: Print version
         run: echo "Version is $VERSION"
       - name: Create Release
