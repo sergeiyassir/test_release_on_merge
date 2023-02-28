@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - test13
 
 jobs:
   simple:
@@ -14,8 +15,17 @@ jobs:
       - uses: actions/checkout@v2
       - name: Set env // from https://stackoverflow.com/a/57969570
         run: |
-          echo "VERSION=$(awk -F'=' '/LIBRARY_VERSION/ {printf "%s", $NF; exit}' gradle.properties)" >> $GITHUB_ENV
-          CHANGES=$(awk 'BEGIN {a = 0} /###/ { if (a == 0) { a = 1 } else { exit 0 } }a' CHANGELOG.md)
+          VERSION=$(
+            LIBRARY_VERSION_MARKER="LIBRARY_VERSION" \
+            awk -f .github/scripts/extract_library_version.awk gradle.properties
+          )
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          
+          CHANGES=$(
+            CHANGELOG_MARKER_START="### ${VERSION}" \
+            CHANGELOG_MARKER_END="###" \
+            awk -f .github/scripts/extract_release_notes.awk CHANGELOG.md
+          )
           echo "CHANGES<<EOF" >> $GITHUB_ENV
           echo "$CHANGES" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
