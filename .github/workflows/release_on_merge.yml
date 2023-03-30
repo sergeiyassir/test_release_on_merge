@@ -45,7 +45,6 @@ jobs:
   package:
     needs: simple
     runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.message, 'Setup the release')
     permissions:
       actions: write
     steps:
