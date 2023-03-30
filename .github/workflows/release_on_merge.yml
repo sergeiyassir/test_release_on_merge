@@ -45,9 +45,9 @@ jobs:
   package:
     runs-on: ubuntu-latest
     if: contains(github.event.head_commit.message, 'Setup the release')
-    - steps:
-      permissions:
-        actions: write
+    permissions:
+      actions: write
+    steps:
       - name: Create package
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
