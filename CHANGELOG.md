@@ -1,6 +1,6 @@
 # YassirVTC Changelog
 
-### 0.10.9
+### 0.10.10
 
 ## Refactoring: Stage II+5
 - \# 221 : [Layering] Refactor classes packages
