@@ -3,12 +3,11 @@ on:
   push:
     branches:
       - master
-      - test13
 
 jobs:
   simple:
     runs-on: ubuntu-latest
-    if: startsWith(github.event.head_commit.message, 'Setup the release')
+    if: contains(github.event.head_commit.message, 'Setup the release')
     permissions:
       contents: write
     steps:
@@ -36,6 +35,9 @@ jobs:
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      - name: Create package
+        run: |
+          gh workflow run .github/workflows/gradle-publish.yml
 
         with:
           tag_name: v${{ env.VERSION }}
