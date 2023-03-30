@@ -4,11 +4,12 @@
 name: Gradle Package
 
 on:
-  workflow_run:
-    workflows:
-      - "create a release and a tag it"
-    types:
-      - completed
+  workflow_dispatch:
+#  workflow_run:
+#    workflows:
+#      - "create a release and a tag it"
+#    types:
+#      - completed
 #  workflow_dispatch: # This allow the workflow to be launched manually if needed
 #  release:
 #    types: [created]
