@@ -45,3 +45,6 @@ jobs:
           body: ${{ env.CHANGES }}
           draft: false
           prerelease: false
+      - name: Create package
+        run: |
+          gh workflow run .github/workflows/gradle-publish.yml
